@@ -40,7 +40,13 @@ function App() {
   //funzione di gestione invio del form
   function handleSubmit(e) {
     e.preventDefault();
-    setPost(formData);
+    setPost(formData); //salvo il post prima di resettare il form
+    setFormData({
+      author: "",
+      title: "",
+      body: "",
+      public: false,
+    });
   }
 
   return (
@@ -101,15 +107,29 @@ function App() {
             </div>
           </form>
           {/* Renderizzo l'anteprima del post mentre digito dentro i campi input */}
-          <div className="card w-50 mx-auto">
-            <div className="card-header">
-              <h2 className="card-title">{formData.title}</h2>
+          {formData.title || formData.body || formData.author ? (
+            <div className="card w-50 mx-auto">
+              <div className="card-header">
+                <h2 className="card-title">{formData.title}</h2>
+              </div>
+              <div className="card-body">
+                <p className="card-text">{formData.body}</p>
+                <p className="card-author">{formData.author}</p>
+              </div>
             </div>
-            <div className="card-body">
-              <p className="card-text">{formData.body}</p>
-              <p className="card-author">{formData.author}</p>
+          ) : null}
+          {/* Pubblico il post dopo il submit */}
+          {post && (
+            <div className="card w-50 mx-auto">
+              <div className="card-header">
+                <h2 className="card-title">{post.title}</h2>
+              </div>
+              <div className="card-body">
+                <p className="card-text">{post.body}</p>
+                <p className="card-author">{post.author}</p>
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </main>
     </>
