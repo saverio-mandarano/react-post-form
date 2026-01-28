@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 function App() {
-  //creo var di stato per la gestione dei dati del form, inizializzati vuoti
+  //creo var (oggetto) per la gestione dei dati del form, inizializzati vuoti
   const [formData, setFormData] = useState({
     author: "",
     title: "",
@@ -11,13 +11,36 @@ function App() {
 
   // creo funzione per aggiornare i valori del form
   function handleFormData(e) {
-    const value =
-      e.target.type === "checkbox" ? e.target.checked : e.target.value;
+    // const value =
+    //   e.target.type === "checkbox" ? e.target.checked : e.target.value;
+    // setFormData({
+    //   ...formData,
+    //   [e.target.name]: value,
+    // });
 
-    setFormData({
-      ...formData,
-      [e.target.name]: value,
-    });
+    //destrutturazione oggetto event (e)
+    const { type, name, value, checked } = e.target;
+
+    const targetValue = type === "checkbox" ? checked : value;
+
+    // setFormData({
+    //   ...formData,
+    //   [name]: targetValue,
+    // });
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: targetValue,
+    }));
+  }
+
+  //var di stato per memorizzare post inviato
+  const [post, setPost] = useState(null);
+
+  //funziona di gestione invio del form
+  function handleSubmit(e) {
+    e.preventDefault();
+    setPost(formData);
   }
 
   return (
@@ -27,7 +50,10 @@ function App() {
       </header>
       <main>
         <div className="container w-75">
-          <form className="p-3">
+          <form
+            className="p-3 d-flex justify-content-center flex-column"
+            onSubmit={handleSubmit}
+          >
             <div className="row">
               <div className="col d-flex justify-content-center">
                 <input
@@ -68,6 +94,9 @@ function App() {
                 Seleziona se il post deve essere pubblico
               </label>
             </div>
+            <button type="submit" className="btn btn-primary mt-3 ">
+              Crea post
+            </button>
           </form>
         </div>
       </main>
@@ -76,11 +105,3 @@ function App() {
 }
 
 export default App;
-
-//
-// I dati che il form dovrà inviare sono i seguenti:
-
-// author (string) - L’autore del post
-// title (string) - Il titolo del post
-// body (string) - Il testo del post
-// public (boolean) - Se il post deve essere pubblico (true) o una bozza (false) [checkbox]
