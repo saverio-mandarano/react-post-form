@@ -22,16 +22,55 @@ function App() {
 
   return (
     <>
-      <h1 className="py-3 text-center">Post Form</h1>
-      <form className="p-3">
-        <input
-          type="text"
-          name="author"
-          placeholder="Autore"
-          value={formData.author}
-          onChange={handleFormData}
-        />
-      </form>
+      <header>
+        <h1 className="py-3 text-center">Post Form</h1>
+      </header>
+      <main>
+        <div className="container w-75">
+          <form className="p-3">
+            <div className="row">
+              <div className="col d-flex justify-content-center">
+                <input
+                  type="text"
+                  name="author"
+                  placeholder="Autore del post..."
+                  value={formData.author}
+                  onChange={handleFormData}
+                />
+                <input
+                  type="text"
+                  name="title"
+                  placeholder="Titolo del post..."
+                  value={formData.title}
+                  onChange={handleFormData}
+                />
+
+                <input
+                  type="text"
+                  name="body"
+                  placeholder="Testo del post..."
+                  value={formData.body}
+                  onChange={handleFormData}
+                />
+              </div>
+            </div>
+
+            <div className="form-check ms-2 d-flex justify-content-center">
+              <input
+                id="publicInput"
+                type="checkbox"
+                name="public"
+                className="form-check-input"
+                checked={formData.public}
+                onChange={handleFormData}
+              />
+              <label className="form-check-label" htmlFor="publicInput">
+                Seleziona se il post deve essere pubblico
+              </label>
+            </div>
+          </form>
+        </div>
+      </main>
     </>
   );
 }
