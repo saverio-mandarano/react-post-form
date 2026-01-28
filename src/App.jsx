@@ -1,4 +1,5 @@
 import { useState } from "react";
+import PostAnteprima from "./components/PostAnteprima";
 
 function App() {
   //creo var (oggetto) per la gestione dei dati del form, inizializzati vuoti
@@ -107,17 +108,7 @@ function App() {
             </div>
           </form>
           {/* Renderizzo l'anteprima del post mentre digito dentro i campi input */}
-          {formData.title || formData.body || formData.author ? (
-            <div className="card w-50 mx-auto">
-              <div className="card-header">
-                <h2 className="card-title">{formData.title}</h2>
-              </div>
-              <div className="card-body">
-                <p className="card-text">{formData.body}</p>
-                <p className="card-author">{formData.author}</p>
-              </div>
-            </div>
-          ) : null}
+          <PostAnteprima formDataProp={formData} />
           {/* Pubblico il post dopo il submit */}
           {posts &&
             posts.map((post, index) => (
