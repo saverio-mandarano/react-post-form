@@ -11,3 +11,7 @@ input {
 .form-check-label {
   cursor: pointer;
 }
+
+.card-author {
+  font-style: italic;
+}

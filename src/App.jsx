@@ -94,10 +94,22 @@ function App() {
                 Seleziona se il post deve essere pubblico
               </label>
             </div>
-            <button type="submit" className="btn btn-primary mt-3 ">
-              Crea post
-            </button>
+            <div className="d-flex justify-content-center mt-3">
+              <button type="submit" className="btn btn-primary ">
+                Crea post
+              </button>
+            </div>
           </form>
+          {/* Renderizzo l'anteprima del post solo dopo che post viene creato */}
+          {post && (
+            <div className="card w-50 mx-auto">
+              <div className="card-body">
+                <h2 className="card-title">{post.title}</h2>
+                <p className="card-text">{post.body}</p>
+                <p className="card-author">Autore: {post.author}</p>
+              </div>
+            </div>
+          )}
         </div>
       </main>
     </>
