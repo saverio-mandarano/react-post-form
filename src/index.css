@@ -19,3 +19,11 @@ input {
 .card-text {
   font-size: 1.3rem;
 }
+
+.card-body {
+  background-color: rgb(204, 255, 196);
+}
+
+.card-header {
+  background-color: bisque;
+}

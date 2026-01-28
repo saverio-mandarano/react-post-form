@@ -35,12 +35,12 @@ function App() {
   }
 
   //var di stato per memorizzare post inviato
-  const [post, setPost] = useState(null);
+  const [posts, setPosts] = useState([]);
 
   //funzione di gestione invio del form
   function handleSubmit(e) {
     e.preventDefault();
-    setPost(formData); //salvo il post prima di resettare il form
+    setPosts((prevPosts) => [...prevPosts, formData]); //salvo il post, aggiungendolo a quelli precedenti,  prima di resettare il form
     setFormData({
       author: "",
       title: "",
@@ -119,17 +119,18 @@ function App() {
             </div>
           ) : null}
           {/* Pubblico il post dopo il submit */}
-          {post && (
-            <div className="card w-50 mx-auto">
-              <div className="card-header">
-                <h2 className="card-title">{post.title}</h2>
+          {posts &&
+            posts.map((post, index) => (
+              <div className="card w-50 mx-auto mb-5" key={index}>
+                <div className="card-header">
+                  <h2 className="card-title">{post.title}</h2>
+                </div>
+                <div className="card-body">
+                  <p className="card-text">{post.body}</p>
+                  <p className="card-author">{post.author}</p>
+                </div>
               </div>
-              <div className="card-body">
-                <p className="card-text">{post.body}</p>
-                <p className="card-author">{post.author}</p>
-              </div>
-            </div>
-          )}
+            ))}
         </div>
       </main>
     </>
