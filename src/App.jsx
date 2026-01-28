@@ -37,7 +37,7 @@ function App() {
   //var di stato per memorizzare post inviato
   const [post, setPost] = useState(null);
 
-  //funziona di gestione invio del form
+  //funzione di gestione invio del form
   function handleSubmit(e) {
     e.preventDefault();
     setPost(formData);
@@ -58,13 +58,6 @@ function App() {
               <div className="col d-flex justify-content-center">
                 <input
                   type="text"
-                  name="author"
-                  placeholder="Autore del post..."
-                  value={formData.author}
-                  onChange={handleFormData}
-                />
-                <input
-                  type="text"
                   name="title"
                   placeholder="Titolo del post..."
                   value={formData.title}
@@ -76,6 +69,13 @@ function App() {
                   name="body"
                   placeholder="Testo del post..."
                   value={formData.body}
+                  onChange={handleFormData}
+                />
+                <input
+                  type="text"
+                  name="author"
+                  placeholder="Autore del post..."
+                  value={formData.author}
                   onChange={handleFormData}
                 />
               </div>
@@ -100,16 +100,16 @@ function App() {
               </button>
             </div>
           </form>
-          {/* Renderizzo l'anteprima del post solo dopo che post viene creato */}
-          {post && (
-            <div className="card w-50 mx-auto">
-              <div className="card-body">
-                <h2 className="card-title">{post.title}</h2>
-                <p className="card-text">{post.body}</p>
-                <p className="card-author">Autore: {post.author}</p>
-              </div>
+          {/* Renderizzo l'anteprima del post mentre digito dentro i campi input */}
+          <div className="card w-50 mx-auto">
+            <div className="card-header">
+              <h2 className="card-title">{formData.title}</h2>
             </div>
-          )}
+            <div className="card-body">
+              <p className="card-text">{formData.body}</p>
+              <p className="card-author">{formData.author}</p>
+            </div>
+          </div>
         </div>
       </main>
     </>
